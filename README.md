@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+这个项目是Claude code 结合deepseek v4 pro完全开发的网页：包含搜索、筛选、评论、打分等功能
+
 ## Getting Started
 
 First, run the development server:
