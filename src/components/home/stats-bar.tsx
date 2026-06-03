@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { StatsBarClient } from "@/components/home/stats-bar-client";
 
 export async function StatsBar() {
   const [totalSideHustles, totalComments, totalRatings] = await Promise.all([
@@ -14,21 +15,5 @@ export async function StatsBar() {
     { label: "用户评分", value: totalRatings, suffix: "+" },
   ];
 
-  return (
-    <section className="py-12 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold mb-1">
-                {stat.value}
-                {stat.suffix}
-              </div>
-              <div className="text-sm opacity-80">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <StatsBarClient stats={stats} />;
 }

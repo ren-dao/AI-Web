@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Copy, Check, MessageCircle, Link2 } from "lucide-react";
+import { Copy, Check, Send, MessageCircle, Link2 } from "lucide-react";
 
 interface ShareDialogProps {
   open: boolean;
@@ -79,7 +79,7 @@ export function ShareDialog({ open, onOpenChange, title, url }: ShareDialogProps
               className="flex flex-col items-center gap-2 h-auto py-4 px-6"
               onClick={handleShareWeibo}
             >
-              <MessageCircle className="h-6 w-6 text-red-500" />
+              <Send className="h-6 w-6 text-red-500" />
               <span className="text-xs">分享到微博</span>
             </Button>
             <Button

@@ -7,6 +7,7 @@ import { SearchBar } from "@/components/search/search-bar";
 import { FilterPanel } from "@/components/search/filter-panel";
 import { SortSelect } from "@/components/search/sort-select";
 import { ActiveFilters } from "@/components/search/active-filters";
+import { FadeInSection } from "@/components/ui/fade-in-section";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
@@ -174,7 +175,7 @@ export default function BrowsePage() {
           ) : data.length === 0 ? (
             <EmptyState search={debouncedSearch} />
           ) : (
-            <>
+            <FadeInSection>
               <div className="mb-4 text-sm text-muted-foreground">
                 共找到 <span className="font-medium text-foreground">{pagination?.total || 0}</span> 个副业
               </div>
@@ -246,7 +247,7 @@ export default function BrowsePage() {
                   </Pagination>
                 </div>
               )}
-            </>
+            </FadeInSection>
           )}
         </div>
       </div>
