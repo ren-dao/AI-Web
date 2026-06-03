@@ -30,31 +30,42 @@ export function ActiveFilters({
   return (
     <div className="flex flex-wrap items-center gap-2">
       {search && (
-        <Badge variant="secondary" className="gap-1 px-3 py-1">
-          搜索: {search}
-          <button onClick={onRemoveSearch}>
-            <X className="h-3 w-3 ml-1" />
-          </button>
-        </Badge>
+        <span className="animate-in fade-in slide-in-from-left-2 duration-200">
+          <Badge variant="secondary" className="gap-1 px-3 py-1">
+            搜索: {search}
+            <button onClick={onRemoveSearch} className="hover:text-destructive transition-colors">
+              <X className="h-3 w-3 ml-1" />
+            </button>
+          </Badge>
+        </span>
       )}
       {categories.map((cat) => (
-        <Badge key={cat} variant="secondary" className="gap-1 px-3 py-1">
-          {cat}
-          <button onClick={() => onRemoveCategory(cat)}>
-            <X className="h-3 w-3 ml-1" />
-          </button>
-        </Badge>
+        <span key={cat} className="animate-in fade-in slide-in-from-left-2 duration-200">
+          <Badge variant="secondary" className="gap-1 px-3 py-1">
+            {cat}
+            <button onClick={() => onRemoveCategory(cat)} className="hover:text-destructive transition-colors">
+              <X className="h-3 w-3 ml-1" />
+            </button>
+          </Badge>
+        </span>
       ))}
       {difficulties.map((diff) => (
-        <Badge key={diff} variant="secondary" className="gap-1 px-3 py-1">
-          {diff}
-          <button onClick={() => onRemoveDifficulty(diff)}>
-            <X className="h-3 w-3 ml-1" />
-          </button>
-        </Badge>
+        <span key={diff} className="animate-in fade-in slide-in-from-left-2 duration-200">
+          <Badge variant="secondary" className="gap-1 px-3 py-1">
+            {diff}
+            <button onClick={() => onRemoveDifficulty(diff)} className="hover:text-destructive transition-colors">
+              <X className="h-3 w-3 ml-1" />
+            </button>
+          </Badge>
+        </span>
       ))}
       {(categories.length > 0 || difficulties.length > 0) && (
-        <Button variant="ghost" size="sm" onClick={onResetAll} className="h-7 text-xs">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onResetAll}
+          className="h-7 text-xs transition-all duration-200 hover:text-destructive"
+        >
           清除全部
         </Button>
       )}

@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { CATEGORIES, DIFFICULTY_LEVELS } from "@/lib/constants";
-import { Plus, X, Send, ArrowLeft } from "lucide-react";
+import { Plus, X, Send, ArrowLeft, Check } from "lucide-react";
 import Link from "next/link";
 
 function DynamicInputList({
@@ -250,11 +250,36 @@ export default function SubmitPage() {
         </p>
       </div>
 
+      {/* 步骤指示器 */}
+      <div className="flex items-center justify-between mb-8 px-2">
+        {[
+          { num: 1, label: "基本信息" },
+          { num: 2, label: "收益投入" },
+          { num: 3, label: "入门要求" },
+          { num: 4, label: "评价经验" },
+          { num: 5, label: "你的信息" },
+        ].map((step, i, arr) => (
+          <div key={step.num} className="flex items-center flex-1 last:flex-none">
+            <div className="flex flex-col items-center gap-1">
+              <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold border-2 border-primary/20">
+                {step.num}
+              </div>
+              <span className="text-[10px] text-muted-foreground text-center hidden sm:block">
+                {step.label}
+              </span>
+            </div>
+            {i < arr.length - 1 && (
+              <div className="flex-1 h-0.5 mx-1 bg-gradient-to-r from-primary/20 to-muted" />
+            )}
+          </div>
+        ))}
+      </div>
+
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* 第一部分：基本信息 */}
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <h2 className="text-lg font-semibold">📋 基本信息</h2>
+            <h2 className="text-lg font-semibold">1. 📋 基本信息</h2>
             <div className="space-y-2">
               <Label htmlFor="title">标题 *</Label>
               <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="例如：微信公众号写作" maxLength={100} required />
@@ -311,7 +336,7 @@ export default function SubmitPage() {
         {/* 第二部分：收益与投入 */}
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <h2 className="text-lg font-semibold">💰 收益与投入</h2>
+            <h2 className="text-lg font-semibold">2. 💰 收益与投入</h2>
             <div className="space-y-2">
               <Label htmlFor="timeInvestment">时间投入 *</Label>
               <Input id="timeInvestment" value={timeInvestment} onChange={(e) => setTimeInvestment(e.target.value)} placeholder="例如：10-20 小时/周" required />
@@ -336,7 +361,7 @@ export default function SubmitPage() {
         {/* 第三部分：入门要求 */}
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <h2 className="text-lg font-semibold">🔧 入门要求</h2>
+            <h2 className="text-lg font-semibold">3. 🔧 入门要求</h2>
             <DynamicInputList label="所需技能" values={requiredSkills} onChange={setRequiredSkills} placeholder="例如：写作能力" />
             <DynamicInputList label="所需工具/资源" values={toolsResources} onChange={setToolsResources} placeholder="例如：电脑、Canva" />
             <DynamicInputList label="入门步骤" values={stepsToStart} onChange={setStepsToStart} placeholder="例如：注册账号并完善资料" />
@@ -346,7 +371,7 @@ export default function SubmitPage() {
         {/* 第四部分：评价与资源 */}
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <h2 className="text-lg font-semibold">📝 评价与经验</h2>
+            <h2 className="text-lg font-semibold">4. 📝 评价与经验</h2>
             <DynamicInputList label="优点" values={pros} onChange={setPros} placeholder="例如：门槛低、时间自由" />
             <DynamicInputList label="缺点/挑战" values={cons} onChange={setCons} placeholder="例如：竞争激烈" />
             <DynamicInputList label="成功贴士" values={tipsForSuccess} onChange={setTipsForSuccess} placeholder="例如：选择垂直领域深耕" />
@@ -357,7 +382,7 @@ export default function SubmitPage() {
         {/* 第五部分：你的信息 */}
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <h2 className="text-lg font-semibold">👤 你的信息</h2>
+            <h2 className="text-lg font-semibold">5. 👤 你的信息</h2>
             <div className="space-y-2">
               <Label htmlFor="submitterName">你的名字 *</Label>
               <Input id="submitterName" value={submitterName} onChange={(e) => setSubmitterName(e.target.value)} placeholder="让大家都知道你的贡献" required />
@@ -370,7 +395,7 @@ export default function SubmitPage() {
         </Card>
 
         {/* 提交按钮 */}
-        <div className="flex flex-col sm:flex-row gap-3 sticky bottom-4 bg-background p-4 border rounded-lg shadow-lg">
+        <div className="flex flex-col sm:flex-row gap-3 sticky bottom-4 bg-card/95 backdrop-blur-sm p-4 border border-primary/10 rounded-lg shadow-lg">
           <Button type="submit" size="lg" className="flex-1 gap-2" disabled={submitting}>
             <Send className="h-5 w-5" />
             {submitting ? "提交中..." : "提交分享"}

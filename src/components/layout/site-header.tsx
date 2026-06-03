@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { SearchCommand } from "@/components/layout/search-command";
 import { cn } from "@/lib/utils";
-import { Menu, Search, PlusCircle } from "lucide-react";
+import { Menu, Search, PlusCircle, Sun, Moon } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/", label: "首页" },
@@ -19,6 +20,10 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm">
@@ -26,7 +31,7 @@ export function SiteHeader() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 font-bold text-xl shrink-0">
           <span className="text-2xl">💼</span>
-          <span className="hidden sm:inline bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <span className="hidden sm:inline bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
             副业宝典
           </span>
         </Link>
@@ -62,6 +67,19 @@ export function SiteHeader() {
             <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground ml-4">
               Ctrl+K
             </kbd>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="text-muted-foreground"
+            aria-label="切换主题"
+          >
+            {mounted ? (
+              theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />
+            ) : (
+              <Sun className="h-5 w-5" />
+            )}
           </Button>
           <Link href="/submit">
             <Button size="sm" className="gap-2">
@@ -108,6 +126,21 @@ export function SiteHeader() {
                     分享副业
                   </Button>
                 </Link>
+                <Button
+                  variant="outline"
+                  className="w-full gap-2"
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                >
+                  {mounted ? (
+                    theme === "dark" ? (
+                      <><Sun className="h-4 w-4" /> 切换亮色模式</>
+                    ) : (
+                      <><Moon className="h-4 w-4" /> 切换暗色模式</>
+                    )
+                  ) : (
+                    <><Sun className="h-4 w-4" /> 切换主题</>
+                  )}
+                </Button>
               </div>
             </SheetContent>
           </Sheet>

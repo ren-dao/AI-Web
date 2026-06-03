@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { CATEGORIES, DIFFICULTY_LEVELS } from "@/lib/constants";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, FolderOpen, BarChart3, DollarSign } from "lucide-react";
 
 interface FilterPanelProps {
   selectedCategories: string[];
@@ -19,6 +19,12 @@ interface FilterPanelProps {
   onMaxIncomeChange: (val: string) => void;
   onReset: () => void;
 }
+
+const DIFFICULTY_DOT_COLORS: Record<string, string> = {
+  "入门": "border-green-500 bg-green-500",
+  "中级": "border-yellow-500 bg-yellow-500",
+  "高级": "border-red-500 bg-red-500",
+};
 
 export function FilterPanel({
   selectedCategories,
@@ -67,7 +73,10 @@ export function FilterPanel({
 
       {/* 分类 */}
       <div>
-        <h4 className="text-sm font-medium mb-2">分类</h4>
+        <h4 className="text-sm font-medium mb-2 flex items-center gap-1.5">
+          <FolderOpen className="h-3.5 w-3.5 text-muted-foreground" />
+          分类
+        </h4>
         <div className="space-y-1.5 max-h-[300px] overflow-y-auto">
           {CATEGORIES.map((cat) => (
             <div
@@ -89,7 +98,10 @@ export function FilterPanel({
 
       {/* 难度 */}
       <div>
-        <h4 className="text-sm font-medium mb-2">难度等级</h4>
+        <h4 className="text-sm font-medium mb-2 flex items-center gap-1.5">
+          <BarChart3 className="h-3.5 w-3.5 text-muted-foreground" />
+          难度等级
+        </h4>
         <div className="space-y-1.5">
           {DIFFICULTY_LEVELS.map((diff) => (
             <div
@@ -102,10 +114,10 @@ export function FilterPanel({
             >
               <span
                 className={cn(
-                  "w-3 h-3 rounded-full border-2",
+                  "w-3 h-3 rounded-full border-2 transition-colors",
                   selectedDifficulties.includes(diff.value)
-                    ? "bg-primary border-primary"
-                    : "border-muted-foreground"
+                    ? DIFFICULTY_DOT_COLORS[diff.value] || "bg-primary border-primary"
+                    : "border-muted-foreground/50"
                 )}
               />
               <span>{diff.label}</span>
@@ -118,7 +130,10 @@ export function FilterPanel({
 
       {/* 收入范围 */}
       <div>
-        <h4 className="text-sm font-medium mb-2">月收入范围 (元)</h4>
+        <h4 className="text-sm font-medium mb-2 flex items-center gap-1.5">
+          <DollarSign className="h-3.5 w-3.5 text-muted-foreground" />
+          月收入范围 (元)
+        </h4>
         <div className="flex items-center gap-2">
           <Input
             type="number"
@@ -127,7 +142,7 @@ export function FilterPanel({
             onChange={(e) => onMinIncomeChange(e.target.value)}
             className="h-9 text-sm"
           />
-          <span className="text-muted-foreground">-</span>
+          <span className="text-muted-foreground shrink-0">-</span>
           <Input
             type="number"
             placeholder="最高"

@@ -1,19 +1,37 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Search, Share2 } from "lucide-react";
+import { useCountUp } from "@/hooks/use-count-up";
+
+const HERO_STATS = [
+  { label: "分类", value: 15, suffix: "+", delay: 0 },
+  { label: "副业案例", value: 50, suffix: "+", delay: 200 },
+  { label: "真实评价", value: 200, suffix: "+", delay: 400 },
+];
+
+function AnimatedStat({ value, suffix, label, delay }: { value: number; suffix: string; label: string; delay: number }) {
+  const { count, ref } = useCountUp({ end: value, duration: 1200, startOnView: false, delay });
+  return (
+    <div className="flex items-center gap-1">
+      <span ref={ref} className="font-bold text-foreground">{count}{suffix}</span> {label}
+    </div>
+  );
+}
 
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden">
       {/* 渐变背景 */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-950 dark:via-purple-950 dark:to-pink-950" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-200/40 via-transparent to-transparent dark:from-blue-800/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-50 to-pink-50 dark:from-primary/20 dark:via-purple-950 dark:to-pink-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent dark:from-primary/15" />
 
       <div className="container mx-auto px-4 py-16 sm:py-24 lg:py-32 max-w-7xl relative">
         <div className="text-center max-w-3xl mx-auto">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
             发现适合你的
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
               {" "}副业之路
             </span>
           </h1>
@@ -37,15 +55,15 @@ export function HeroSection() {
             </Link>
           </div>
           <div className="flex items-center justify-center gap-8 mt-8 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <span className="font-bold text-foreground">15+</span> 分类
-            </div>
-            <div className="flex items-center gap-1">
-              <span className="font-bold text-foreground">50+</span> 副业案例
-            </div>
-            <div className="flex items-center gap-1">
-              <span className="font-bold text-foreground">200+</span> 真实评价
-            </div>
+            {HERO_STATS.map((stat) => (
+              <AnimatedStat
+                key={stat.label}
+                value={stat.value}
+                suffix={stat.suffix}
+                label={stat.label}
+                delay={stat.delay}
+              />
+            ))}
           </div>
         </div>
       </div>

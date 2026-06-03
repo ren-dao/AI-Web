@@ -12,7 +12,7 @@ export function SideHustleCard(props: SideHustleCardData) {
 
   return (
     <Link href={`/sidehustles/${props.id}`}>
-      <Card className="group h-full overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+      <Card className="group h-full overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
         {/* 封面图 */}
         <div className="relative h-40 sm:h-48 overflow-hidden bg-muted">
           {props.coverImage ? (
@@ -23,7 +23,7 @@ export function SideHustleCard(props: SideHustleCardData) {
               loading="lazy"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-4xl bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900">
+            <div className="w-full h-full flex items-center justify-center text-4xl bg-gradient-to-br from-primary/10 to-purple-100 dark:from-primary/20 dark:to-purple-900">
               💼
             </div>
           )}
@@ -55,7 +55,7 @@ export function SideHustleCard(props: SideHustleCardData) {
             {skills.slice(0, 3).map((skill) => (
               <span
                 key={skill}
-                className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground"
+                className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20"
               >
                 {skill}
               </span>

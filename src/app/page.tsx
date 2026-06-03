@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/home/hero-section";
 import { FeaturedGrid } from "@/components/home/featured-grid";
 import { CategoryBrowse } from "@/components/home/category-browse";
 import { StatsBar } from "@/components/home/stats-bar";
+import { FadeInSection } from "@/components/ui/fade-in-section";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -10,11 +11,17 @@ export default function HomePage() {
     <div>
       <HeroSection />
       <Suspense fallback={<FeaturedSkeleton />}>
-        <FeaturedGrid />
+        <FadeInSection>
+          <FeaturedGrid />
+        </FadeInSection>
       </Suspense>
-      <CategoryBrowse />
+      <FadeInSection delay={100}>
+        <CategoryBrowse />
+      </FadeInSection>
       <Suspense fallback={<StatsSkeleton />}>
-        <StatsBar />
+        <FadeInSection delay={200}>
+          <StatsBar />
+        </FadeInSection>
       </Suspense>
     </div>
   );
@@ -40,7 +47,7 @@ function FeaturedSkeleton() {
 
 function StatsSkeleton() {
   return (
-    <section className="py-12 bg-gradient-to-r from-blue-600 to-purple-600">
+    <section className="py-12 bg-gradient-to-r from-primary to-purple-600">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {Array.from({ length: 4 }).map((_, i) => (
