@@ -12,7 +12,7 @@ export function SideHustleCard(props: SideHustleCardData) {
 
   return (
     <Link href={`/sidehustles/${props.id}`}>
-      <Card className="group h-full overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+      <Card className="group h-full overflow-hidden card-accent-line card-3d border border-border/50">
         {/* 封面图 */}
         <div className="relative h-40 sm:h-48 overflow-hidden bg-muted">
           {props.coverImage ? (

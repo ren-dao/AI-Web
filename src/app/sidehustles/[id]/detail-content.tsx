@@ -98,7 +98,7 @@ export function DetailContent({ data }: DetailContentProps) {
               <Badge className={difficulty.color}>{difficulty.label}</Badge>
             )}
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold mb-3">{data.title}</h1>
+          <h1 className="text-2xl sm:text-3xl font-black font-heading mb-3">{data.title}</h1>
           <p className="text-muted-foreground mb-4">{data.description}</p>
 
           {/* 统计信息 */}
