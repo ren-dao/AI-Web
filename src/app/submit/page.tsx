@@ -244,7 +244,7 @@ export default function SubmitPage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">分享你的副业经验</h1>
+        <h1 className="text-3xl font-black font-heading mb-2">分享你的副业经验</h1>
         <p className="text-muted-foreground">
           填写以下信息，帮助更多人找到适合的副业方向
         </p>

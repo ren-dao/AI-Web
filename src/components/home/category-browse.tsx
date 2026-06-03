@@ -24,7 +24,7 @@ export function CategoryBrowse() {
     <section className="py-16">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-2">
+          <h2 className="text-3xl font-black font-heading mb-2">
             <span className="inline-flex items-center justify-center bg-primary/10 rounded-full p-2 mr-2">
               <span className="text-2xl">📂</span>
             </span>
@@ -39,7 +39,7 @@ export function CategoryBrowse() {
               <Link
                 key={cat.value}
                 href={`/sidehustles?category=${encodeURIComponent(cat.value)}`}
-                className={`flex flex-col items-center gap-2 p-4 rounded-xl border bg-card hover:shadow-md hover:border-primary/50 transition-all group ${bgClass}`}
+                className={`flex flex-col items-center gap-2 p-4 rounded-xl border bg-card hover:shadow-lg hover:border-primary/50 transition-all group card-3d ${bgClass}`}
               >
                 <span className="text-3xl group-hover:scale-110 transition-transform">
                   {cat.icon}

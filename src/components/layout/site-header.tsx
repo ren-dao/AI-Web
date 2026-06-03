@@ -31,7 +31,7 @@ export function SiteHeader() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 font-bold text-xl shrink-0">
           <span className="text-2xl">💼</span>
-          <span className="hidden sm:inline bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+          <span className="hidden sm:inline bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent font-heading font-black tracking-tight">
             副业宝典
           </span>
         </Link>
